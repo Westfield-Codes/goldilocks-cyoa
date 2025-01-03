@@ -14,23 +14,38 @@ function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 		homeEnding();
 	} 
 	
-	else if (answer == "Sigh again") {
-		discoverTollbooth();
+	else if (answer == "Play again") {
+		Goldilocks();
 	} 
 	
-	else if (answer == "Unpack it") {
-		unpackTollbooth();
+	else if (answer == "Eat the small porridge") {
+		smallPorridge();
 	} 
 	
-	else if (answer == "Sleep on it") {
-		wildNightmares();
+	else if (answer == "Eat the medium porridge") {
+		meduimPorridge();
 	}
-	else if (answer == "Tell mom") {
-		momCantSeeIt();
+	else if (answer == "Eat the large porridge") {
+		largePorridge();
 	}
 	
-	else if (answer == "Assemble it") {
-		enterKingdomOfWisdom();
+	else if (answer == "Keep running errands") {
+		hospitalEnding();
+	}
+	else if (answer == "Go back to the cabin") {
+		cabin();
+	}
+	else if (answer == "Sleep in the small bed") {
+		smallBed();
+	}
+	else if (answer == "Sleep in the medium bed") {
+		eatenEnding();
+	}
+	else if (answer == "Sleep in the large bed") {
+		largeBed();
+	}
+	else if (answer == "Stay awake") {
+		safeEnding();
 	}
 }
 
@@ -47,67 +62,78 @@ function Goldilocks() {
 
 //1.2 Ignore Cabin
 function ignoreCabin() {
-	story=["When you are in school you long to be out, and when you are out you long to be in. On the way you think about coming home, and coming home you think about going. Wherever you are you wish you were somewhere else, and when you get there you wonder why you bothered. Nothing really interests you—least of all the things that should.", "\"It seems to me that almost everything is a waste of time,\" you say out loud one day as you walk dejectedly home from school. \"I can't see the point in learning to solve useless problems, or subtracting turnips from turnips, or knowing where Ethiopia is or how to spell February.\"",
-	"And, since no one ever bothered to explain otherwise, you regard the process of seeking knowledge as the greatest waste of time of all."]; 
+	story("You ignore the cabin and try to continue, but the weather starts to get even worse. You start to see lightning strike nearby, and are forced to make another decision."); 
     choices = ["Keep running errands","Go back to the cabin","Go back home"];
 	answer = setOptions(choices);
 }
 
 // 1.3 cabin
 function homeEnding() {
-messages=["As you and your unhappy thoughts hurry along (for while you are never anxious to be where you are going, you like to get there as quickly as possible) it seems a great wonder that the world, which was so large, could sometimes feel so small and empty.", "\"And worst of all,\" you continue to say out loud, \"there's nothing for me to do, nowhere I'd care to go, and hardly anything worth seeing.\"","You punctuate this last thought with such a deep sigh that a house sparrow singing nearby stops and rushes home to be with his family.","Without stopping or looking up, you rush past the buildings and busy shops that line the street and in a few minutes reach home—dash through the lobby—hop onto the elevator—two, three, four, five, six, seven, eight, and off again—open the apartment door—rush into your room—flop dejectedly into a chair, and grumble softly, \"Another long afternoon.\""]; 
-    delayText(messages, 1000);
-    choices = ["Sigh again"];
+	story("Although a little wet, you make it home safely. You tell your mother about the strange cabin in the woods, and she says she's never seen it before. You go back to take a picture of the cabin the day after, and once you get to the spot it had been, you find it's not there. Your mother tells you there was never a cabin."); 
+    choices = ["Play again"];
 	answer = setOptions(choices);
 }
 
 // 1.4 Discover Tollbooth
-function discoverTollbooth() {
-  story("You look glumly at all the things you own.  The books that are too much trouble to read, the tools you never learned to use, and the other games and toys and  bits and pieces scattered around you. The ATV you haven't taken out all year.<br><br>And then, to one side of the room, just next to your computer, you notice something you have certainly never seen before!<br><br>Who could POSSIBLY have left such an enormous package and such a strange one? For, while it is not quite square, it is definitely not round, and for its size it is larger than almost any other big package of smaller dimension that you've ever seen!<br><br>Attached to one side is a bright-blue envelope which says simply: <br><br>\"FOR MILO, WHO HAS PLENTY OF TIME.\"");
-	choices = ["Unpack it", "Sleep on it", "Tell mom"];
+function cabin() {
+  story("You go inside the cabin and find no one home. You find 3 bowls of porridge waiting for you on the table, and you feel extremely hungry. One is small and mildly cold, one is medium sized and warm, and one is large and hot.");
+	choices = ["Eat the small porridge", "Eat the medium porridge", "Eat the large porridge"];
 	answer = setOptions(choices);
 }
 
 // 1.5 Wild Nightmares
-function wildNightmares() {
-	story("You have horrible nightmares about what happens to people when they don’t make choices.  You find yourself in a corner, covered with dust and cobwebs, as your brain rots away.  You wake up in a cold sweat.  And there is that big box, in the same place it was before.  What do you do?");
-	choices = ["Unpack it","Tell Mom","Call the Bomb Squad"];
+function hospitalEnding() {
+	story("You try to keep running your errands, but you end up getting struck by lighning. You end up surviving, but you wake up in a hospital and forget all about the cabin in the woods.");
+	choices = ["Play again"];
 	answer = setOptions(choices);
 }
 
 // 1.6 Mom Can't See It
-function momCantSeeIt() {
-	story("You tell mom and she comes to your room with you.  You point at the box.  She says she can’t see it.  You are very angry and frustrated and yell at her.  She sends you to bed and tells you to come out again when you are reasonable. What do you do now?");
-	choices = ["Unpack it","Sleep on it","Call the Bomb Squad"];
+function smallPorridge() {
+	story("The small porridge, although it tasted very good, it was much too cold for your liking. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
+	choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the big bed"];
 	answer = setOptions(choices);
 }
 
 // 1.7 Call the Bomb Squad
-function callBombSquad() {
-	story("[Under Construction] They cannot see it.");
-    choices = ["Unpack it", "Check return address"];
+function meduimPorridge() {
+	story("The medium porridge was perfect. It tasted great and was the perfect temperature. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
+    choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the big bed"];
 	answer = setOptions(choices);
 }
 
 // 1.8 Check Return Address
-function checkReturnAddress() {
-	story("[Under Construction] There is no return address.");
-    choices = ["Unpack it", "Pray for help"];
+function largePorridge() {
+	story("The large porridge was too hot for your liking, it tasted good, but you burned your mouth in the process. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
+    choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the large bed"];
 	answer = setOptions(choices);
 }
 
 // // 1.9 Unpack Tollbooth
-function unpackTollbooth() {
-messages=["In the attached envelope, you find a folded paper that says \"READ ME FIRST!\" You unfold it, and read the following list of contents: ", "\"One (1) genuine turnpike tollbooth to be erected according to directions.\"","\"Assorted coins for use in paying tolls.\"","\"One (1) map, up to date and carefully drawn by master cartographers,depicting natural and man-made features.\"","\"One (1) book of rules and traffic regulations, which may not be bent or broken.\"", "And in smaller letters at the bottom it concludes:\"Results are not guaranteed, but if not perfectly satisfied, your wasted time will be refunded.\""]; 
-    delayText(messages, 2000);
-    choices = ["Assemble it"];
+function smallBed() {
+	story("You try sleeping in the small bed, but its too soft for your liking and it feels as if you sink into the bed whenevr you lay down. You can't fall asleep."); 
+    choices = ["Sleep in the medium bed","Sleep in the large bed","Stay awake"];
 	answer = setOptions(choices);
 }
 
 // 1.10 Enter Kingdom of Wisdom
-function enterKingdomOfWisdom() { 
-  story("[Under Construction] Once the tollbooth (for it is a tollbooth) is assembled, a man magically appears within it.  You approach, and the man says, \"Cars only.\"  You start up your ATV and drive up to the tollbooth (your room got much larger). The man says, \"One token, please.\" You reach into your pocket, find one of the tokens from the box, and give it to the man. <br><br>  He accepts it, and you drive by the booth. <br><br>  Suddenly the landscape changes, and you see high, pointy mountains in the distance, and a forest directly ahead along the road as you walk.  You feel excited and scared at the same time.<br><br>   The road splits into three, and there is a signpost with three signs, each with a name and pointing to a road.  Pointing left says Words, pointing center says Numbers, and pointing right says Whatever. <br><br>Which road do you follow?");
-	choices = ["Left","Center","Right"];
+function eatenEnding() { 
+  story("You fall asleep very easily in the medium bed, it was perfectly soft enough and just the right size. When you wake up you hear something entering the cabin, and upon investigation you find three bears, a mom, a dad, and a son. They were angry that you tresspassed into their cabin and ate their porridge. You were never found again.");
+	choices = ["Play again"];
 	answer = setOptions(choices);
 }
+
+// 1.10 Enter Kingdom of Wisdom
+function largeBed() { 
+	story("You try sleeping in the big bed but its too hard for your liking, it feels like sleeping on a wooden board. You can't fall asleep.");
+	  choices = ["Sleep in the small bed","Sleep in the medium bed","Stay awake"];
+	  answer = setOptions(choices);
+  }
+
+  // 1.10 Enter Kingdom of Wisdom
+function safeEnding() { 
+	story("You wait for the storm to pass. After it stops raining you go back home, and will resume running errands tommorow.");
+	  choices = ["Play again"];
+	  answer = setOptions(choices);
+  }
 
