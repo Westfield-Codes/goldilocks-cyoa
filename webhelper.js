@@ -7,7 +7,8 @@ var dropdown = document.getElementById("choices");
 var messages = [];
 var choices;
 var answer;
-
+var picture = document.getElementById("picture");
+var image = document.getElementById("image");
 function start() {
   setup();
   scene1();
@@ -16,6 +17,7 @@ function start() {
 function setup() {
   story("Game Loading");
   options=["test 1", "test 2", "test3"];
+  image.src="goldilocks.jpg";
   setOptions(options); 
   buttonElement.innerHTML = "What will you do?"; 
   buttonElement.setAttribute("onclick", "checkAnswers(dropdown.value)");

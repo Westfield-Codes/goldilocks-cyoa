@@ -57,6 +57,7 @@ function removeMap(){
 function Goldilocks() {
   story("One day you're sent out to run errands in the woods, it starts pouring rain and you come across a small cabin that youve never seen before, that smells like freshly baked porridge.");
 	choices = ["Ignore cabin","Go to the cabin","Go back home"];
+	image.src = "cabin.jpg";
 	answer = setOptions(choices);
 }
 
@@ -64,6 +65,7 @@ function Goldilocks() {
 function ignoreCabin() {
 	story("You ignore the cabin and try to continue, but the weather starts to get even worse. You start to see lightning strike nearby, and are forced to make another decision."); 
     choices = ["Keep running errands","Go back to the cabin","Go back home"];
+	image.src = "storm.jpg"; 
 	answer = setOptions(choices);
 }
 
@@ -71,6 +73,7 @@ function ignoreCabin() {
 function homeEnding() {
 	story("Although a little wet, you make it home safely. You tell your mother about the strange cabin in the woods, and she says she's never seen it before. You go back to take a picture of the cabin the day after, and once you get to the spot it had been, you find it's not there. Your mother tells you there was never a cabin."); 
     choices = ["Play again"];
+	image.src  = "house-storm.jpg"
 	answer = setOptions(choices);
 }
 
