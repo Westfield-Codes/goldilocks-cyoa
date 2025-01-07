@@ -65,7 +65,7 @@ function Goldilocks() {
 function ignoreCabin() {
 	story("You ignore the cabin and try to continue, but the weather starts to get even worse. You start to see lightning strike nearby, and are forced to make another decision."); 
     choices = ["Keep running errands","Go back to the cabin","Go back home"];
-	image.src = "storm.jpg"; 
+	image.src = "thunderstorm.jpg"; 
 	answer = setOptions(choices);
 }
 
@@ -73,7 +73,7 @@ function ignoreCabin() {
 function homeEnding() {
 	story("Although a little wet, you make it home safely. You tell your mother about the strange cabin in the woods, and she says she's never seen it before. You go back to take a picture of the cabin the day after, and once you get to the spot it had been, you find it's not there. Your mother tells you there was never a cabin."); 
     choices = ["Play again"];
-	image.src  = "house-storm.jpg"
+	image.src  = "house-storm.jpg";
 	answer = setOptions(choices);
 }
 
@@ -81,6 +81,7 @@ function homeEnding() {
 function cabin() {
   story("You go inside the cabin and find no one home. You find 3 bowls of porridge waiting for you on the table, and you feel extremely hungry. One is small and mildly cold, one is medium sized and warm, and one is large and hot.");
 	choices = ["Eat the small porridge", "Eat the medium porridge", "Eat the large porridge"];
+	image.src = "porridge.jpg";
 	answer = setOptions(choices);
 }
 
@@ -88,27 +89,31 @@ function cabin() {
 function hospitalEnding() {
 	story("You try to keep running your errands, but you end up getting struck by lighning. You end up surviving, but you wake up in a hospital and forget all about the cabin in the woods.");
 	choices = ["Play again"];
+	image.src = "lightningstruck.jpg"
 	answer = setOptions(choices);
 }
 
 // 1.6 Mom Can't See It
 function smallPorridge() {
 	story("The small porridge, although it tasted very good, it was much too cold for your liking. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
-	choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the big bed"];
+	choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the large bed"];
+	image.src = "beds.jpg"
 	answer = setOptions(choices);
 }
 
 // 1.7 Call the Bomb Squad
 function meduimPorridge() {
 	story("The medium porridge was perfect. It tasted great and was the perfect temperature. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
-    choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the big bed"];
+    choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the large bed"];
+	image.src = "beds.jpg"
 	answer = setOptions(choices);
 }
 
 // 1.8 Check Return Address
 function largePorridge() {
 	story("The large porridge was too hot for your liking, it tasted good, but you burned your mouth in the process. After eating, you now become very tired. You find 3 beds in the room next door; a small one, a medium sized one, and a large one.  ");
-    choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the large bed"];
+    image.src = "beds.jpg"
+	choices = ["Sleep in the small bed","Sleep in the medium bed","Sleep in the large bed"];
 	answer = setOptions(choices);
 }
 
@@ -116,6 +121,7 @@ function largePorridge() {
 function smallBed() {
 	story("You try sleeping in the small bed, but its too soft for your liking and it feels as if you sink into the bed whenevr you lay down. You can't fall asleep."); 
     choices = ["Sleep in the medium bed","Sleep in the large bed","Stay awake"];
+	image.src = "cantsleep.jpg"
 	answer = setOptions(choices);
 }
 
@@ -123,20 +129,23 @@ function smallBed() {
 function eatenEnding() { 
   story("You fall asleep very easily in the medium bed, it was perfectly soft enough and just the right size. When you wake up you hear something entering the cabin, and upon investigation you find three bears, a mom, a dad, and a son. They were angry that you tresspassed into their cabin and ate their porridge. You were never found again.");
 	choices = ["Play again"];
+	image.src = "eaten.jpg"
 	answer = setOptions(choices);
 }
 
 // 1.10 Enter Kingdom of Wisdom
 function largeBed() { 
 	story("You try sleeping in the big bed but its too hard for your liking, it feels like sleeping on a wooden board. You can't fall asleep.");
-	  choices = ["Sleep in the small bed","Sleep in the medium bed","Stay awake"];
-	  answer = setOptions(choices);
+	choices = ["Sleep in the small bed","Sleep in the medium bed","Stay awake"];
+	image.src = "cantsleep.jpg"
+	answer = setOptions(choices);
   }
 
   // 1.10 Enter Kingdom of Wisdom
 function safeEnding() { 
 	story("You wait for the storm to pass. After it stops raining you go back home, and will resume running errands tommorow.");
 	  choices = ["Play again"];
+	  image.src = "sunny.jpg"
 	  answer = setOptions(choices);
   }
 
