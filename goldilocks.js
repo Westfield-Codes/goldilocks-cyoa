@@ -4,6 +4,7 @@ scene1 = Goldilocks;
 
 function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	if (answer == "Ignore cabin") {
+		diceGame();
 		ignoreCabin();
 	} 
 	
@@ -149,3 +150,31 @@ function safeEnding() {
 	  answer = setOptions(choices);
   }
 
+function diceGame(){
+	let roll = 0;
+	let diceOne = rollDie();
+	let diceTwo = rollDie();
+	let target = diceOne + diceTwo;
+	if(target == 7 || target == 11){
+		alert("You crapped out! Try again.");
+		diceGame();
+	}
+	else {
+		alert("Hit "+target+" before you roll 7 or 11 to continue.");
+		while(roll != target && roll != 7 && roll != 11){
+			diceOne = rollDie();
+			diceTwo = rollDie();
+			roll = diceOne + diceTwo;
+		}
+		if(roll == target){
+			alert("You rolled a "+roll+" you are in!");
+		}
+		else{ 
+			alert("You crapped out with a "+roll+". Try again.");
+			diceGame();
+		}
+	}
+}
+function rollDie(){
+	return Math.floor(Math.random()*6+1);
+}
