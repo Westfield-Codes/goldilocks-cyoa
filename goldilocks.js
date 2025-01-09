@@ -151,30 +151,56 @@ function safeEnding() {
   }
 
 function diceGame(){
+	let popup = document.getElementById("popup");
+	popup.innerHTML = "";
+
+	let message ="<h2>Play Craps</h2>";
 	let roll = 0;
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
+	message += "<p>Your target is "+target+"</p>";
+	popup.innerHTML = message;
+	let dialogue = document.createElement("p");
+	popup.appendChild(dialogue);
+	dialogue.innerHTML = message;
 	if(target == 7 || target == 11){
-		alert("You crapped out! Try again.");
+		message = "You crapped out! Try again.";
+		dialogue.innerHTML = message;
+
 		diceGame();
 	}
 	else {
-		alert("Hit "+target+" before you roll 7 or 11 to continue.");
+			message = "Hit "+target+" before you roll 7 or 11 to continue.";
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
 		while(roll != target && roll != 7 && roll != 11){
 			diceOne = rollDie();
 			diceTwo = rollDie();
 			roll = diceOne + diceTwo;
 		}
 		if(roll == target){
-			alert("You rolled a "+roll+" you are in!");
+			message = "You rolled a "+roll+" you are in!";
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
+			let wonCraps = document.createElement("button");
+			wonCraps.innerHTML = "Close"
+			wonCraps.addEventListener("click",closePopup);
+			popup.appendChild(wonCraps);
 		}
 		else{ 
-			alert("You crapped out with a "+roll+". Try again.");
+			message = "You crapped out with a "+roll+". Try again.";
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
 			diceGame();
 		}
 	}
 }
 function rollDie(){
 	return Math.floor(Math.random()*6+1);
+}
+function closePopup(){
+	let popup = document.getElementById("popup");
+	popup.style.display = "none";
+
 }
