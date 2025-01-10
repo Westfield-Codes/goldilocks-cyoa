@@ -1,6 +1,7 @@
 // tollbooth.js
 // Matches https://docs.google.com/spreadsheets/d/1eu_ymKNlnSQUzi6JfSyOwWewXX2fybDIw2YZfzhWIic/edit
 scene1 = Goldilocks;
+var roll = 0;
 
 function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	if (answer == "Ignore cabin") {
@@ -20,6 +21,7 @@ function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	} 
 	
 	else if (answer == "Eat the small porridge") {
+		diceGame();
 		smallPorridge();
 	} 
 	
@@ -27,6 +29,7 @@ function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 		meduimPorridge();
 	}
 	else if (answer == "Eat the large porridge") {
+		diceGame();
 		largePorridge();
 	}
 	
@@ -153,22 +156,24 @@ function safeEnding() {
 function diceGame(){
 	let popup = document.getElementById("popup");
 	popup.innerHTML = "";
-
+	popup.style.display = "block";
 	let message ="<h2>Play Craps</h2>";
-	let roll = 0;
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
 	message += "<p>Your target is "+target+"</p>";
 	popup.innerHTML = message;
+	let rollCraps = document.createElement("button");
+	rollCraps.innerHTML = "Roll";
+	popup.appendChild(rollCraps);
 	let dialogue = document.createElement("p");
 	popup.appendChild(dialogue);
 	dialogue.innerHTML = message;
 	if(target == 7 || target == 11){
 		message = "You crapped out! Try again.";
 		dialogue.innerHTML = message;
-
-		diceGame();
+		// popup.remove;
+		// diceGame();
 	}
 	else {
 			message = "Hit "+target+" before you roll 7 or 11 to continue.";
@@ -189,18 +194,19 @@ function diceGame(){
 			popup.appendChild(wonCraps);
 		}
 		else{ 
-			message = "You crapped out with a "+roll+". Try again.";
+			message = "You crapped out with a(n) "+roll+". Try again.";
 			dialogue.innerHTML = message;
 			popup.appendChild(dialogue);
 			diceGame();
 		}
 	}
 }
+
 function rollDie(){
 	return Math.floor(Math.random()*6+1);
 }
+
 function closePopup(){
 	let popup = document.getElementById("popup");
 	popup.style.display = "none";
-
 }
