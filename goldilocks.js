@@ -163,29 +163,32 @@ function diceGame(){
 	let target = diceOne + diceTwo;
 	message += "<p>Your target is "+target+"</p>";
 	popup.innerHTML = message;
-	let rollCraps = document.createElement("button");
-	rollCraps.innerHTML = "Roll";
-	popup.appendChild(rollCraps);
 	let dialogue = document.createElement("p");
 	popup.appendChild(dialogue);
 	dialogue.innerHTML = message;
 	if(target == 7 || target == 11){
 		message = "You crapped out! Try again.";
 		dialogue.innerHTML = message;
-		// popup.remove;
-		// diceGame();
+		let tryAgain = document.createElement("button");
+		tryAgain.innerHTML = "Re-roll";
+		tryAgain.addEventListener("click",closePopup);
+		tryAgain.addEventListener("click",diceGame);
+		popup.appendChild(tryAgain);
 	}
 	else {
 			message = "Hit "+target+" before you roll 7 or 11 to continue.";
 			dialogue.innerHTML = message;
 			popup.appendChild(dialogue);
-		while(roll != target && roll != 7 && roll != 11){
+			// let rollCraps = document.createElement("button");
+			// rollCraps.innerHTML = "Roll";
+			// popup.appendChild(rollCraps);
+			while(roll != target && roll != 7 && roll != 11){
 			diceOne = rollDie();
 			diceTwo = rollDie();
 			roll = diceOne + diceTwo;
 		}
 		if(roll == target){
-			message = "You rolled a "+roll+" you are in!";
+			message = "You rolled a(n) "+roll+" you are in!";
 			dialogue.innerHTML = message;
 			popup.appendChild(dialogue);
 			let wonCraps = document.createElement("button");
@@ -210,3 +213,11 @@ function closePopup(){
 	let popup = document.getElementById("popup");
 	popup.style.display = "none";
 }
+// Things left to do: 
+// Fix tryAgain button, 
+// add rollCraps button, 
+// let rollCraps = rollDie, 
+// create all if statements
+// if (rollCraps == target) message = "You rolled a(n) "+roll+" you are in!", dialogue.innerHTML = message, popup.appendChild(dialogue), let wonCraps = document.createElement("button"), wonCraps.innerHTML = "Close", wonCraps.addEventListener("click",closePopup), popup.appendChild(wonCraps);
+// else if (rollCraps == 7 || rollCraps = 11) message = "You crapped out with a(n) "+roll+". Try again.", dialogue.innerHTML = message, popup.appendChild(dialogue), diceGame()
+// else message = "You rolled a(n) "+roll+". Try again.", dialogue.innerHTML = message, popup.appendChild(dialogue), 
