@@ -5,7 +5,7 @@ var roll = 0;
 
 function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	if (answer == "Ignore cabin") {
-		diceGame();
+		crapsSetup();
 		ignoreCabin();
 	} 
 	
@@ -21,7 +21,7 @@ function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	} 
 	
 	else if (answer == "Eat the small porridge") {
-		diceGame();
+		crapsSetup();
 		smallPorridge();
 	} 
 	
@@ -29,7 +29,7 @@ function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 		meduimPorridge();
 	}
 	else if (answer == "Eat the large porridge") {
-		diceGame();
+		crapsSetup();
 		largePorridge();
 	}
 	
@@ -153,19 +153,24 @@ function safeEnding() {
 	  answer = setOptions(choices);
   }
 
-function diceGame(){
-	let popup = document.getElementById("popup");
+function crapsSetup(){
+	let popup =  document.getElementById("popup");
 	popup.innerHTML = "";
 	popup.style.display = "block";
-	let message ="<h2>Play Craps</h2>";
+	let dialogue = document.createElement("p");
+	dialogue.id = "dialogue";
+	popup.appendChild(dialogue);
+	diceGame();
+}
+function diceGame(){
+	let dialogue = document.getElementById("dialogue");
+	let gameOver = false;
+	let message ="";
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
-	message += "<p>Your target is "+target+"</p>";
+	message = "<p>Your target is "+target+"</p>";
 	popup.innerHTML = message;
-	let dialogue = document.createElement("p");
-	popup.appendChild(dialogue);
-	dialogue.innerHTML = message;
 	if(target == 7 || target == 11){
 		message = "You crapped out! Try again.";
 		dialogue.innerHTML = message;
@@ -176,33 +181,51 @@ function diceGame(){
 		popup.appendChild(tryAgain);
 	}
 	else {
-			message = "Hit "+target+" before you roll 7 or 11 to continue.";
-			dialogue.innerHTML = message;
-			popup.appendChild(dialogue);
-			// let rollCraps = document.createElement("button");
-			// rollCraps.innerHTML = "Roll";
-			// popup.appendChild(rollCraps);
-			while(roll != target && roll != 7 && roll != 11){
+		let roll = 0;
+		message = "Hit "+target+" before you roll 7 or 11 to continue.";
+		dialogue.innerHTML = message;
+		popup.appendChild(dialogue);
+		// let rollCraps = document.createElement("button");
+		// rollCraps.innerHTML = "Roll";
+		// popup.appendChild(rollCraps);
+		while(gameOver == false){
 			diceOne = rollDie();
 			diceTwo = rollDie();
 			roll = diceOne + diceTwo;
+			if(roll == target){
+				message = "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
+				dialogue.innerHTML = message;
+				popup.appendChild(dialogue);
+				gameOver = true;
+				let wonCraps = document.createElement("button");
+				wonCraps.innerHTML = "Close"
+				wonCraps.addEventListener("click",closePopup);
+				popup.appendChild(wonCraps);
+			}
+			else if(roll == 7 || roll == 11){ 
+				message = "You crapped out with a(n) "+roll+". Try again.";
+				dialogue.innerHTML = message;
+				popup.appendChild(dialogue);
+				gameOver = true;
+			}
+			else {
+				message = "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Roll again."
+				dialogue.innerHTML = message;
+				popup.appendChild(dialogue);
+			}
 		}
-		if(roll == target){
-			message = "You rolled a(n) "+roll+" you are in!";
-			dialogue.innerHTML = message;
-			popup.appendChild(dialogue);
-			let wonCraps = document.createElement("button");
-			wonCraps.innerHTML = "Close"
-			wonCraps.addEventListener("click",closePopup);
-			popup.appendChild(wonCraps);
-		}
-		else{ 
-			message = "You crapped out with a(n) "+roll+". Try again.";
-			dialogue.innerHTML = message;
-			popup.appendChild(dialogue);
-			diceGame();
-		}
+		clearPopup();
+		if(roll == 7 || roll == 11) diceGame();
+		/*  else returnToStory(); */
 	}
+}
+
+function clearPopup(){
+
+}
+
+function returnToStory(){
+
 }
 
 function rollDie(){
