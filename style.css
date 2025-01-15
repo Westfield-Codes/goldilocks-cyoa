@@ -66,6 +66,9 @@ button {
 .hide{
     display: none;
 }
+.display{
+    display: 100%;
+}
 #popup{
     position: absolute;
     background-color: white;

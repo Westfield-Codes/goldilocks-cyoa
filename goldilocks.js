@@ -164,30 +164,36 @@ function crapsSetup(){
 }
 function diceGame(){
 	let dialogue = document.getElementById("dialogue");
+	dialogue.innerHTML = ""
 	let gameOver = false;
 	let message ="";
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
 	message = "<p>Your target is "+target+"</p>";
-	popup.innerHTML = message;
+	dialogue.innerHTML = message;
 	if(target == 7 || target == 11){
 		message = "You crapped out! Try again.";
 		dialogue.innerHTML = message;
 		let tryAgain = document.createElement("button");
+		tryAgain.id = "tryAgain"
 		tryAgain.innerHTML = "Re-roll";
-		tryAgain.addEventListener("click",closePopup);
-		tryAgain.addEventListener("click",diceGame);
+		tryAgain.addEventListener("click",crapsReRoll());
 		popup.appendChild(tryAgain);
+		// diceGame();
+		// tryAgain.addEventListener("click",diceGame);
+		
 	}
 	else {
 		let roll = 0;
 		message = "Hit "+target+" before you roll 7 or 11 to continue.";
 		dialogue.innerHTML = message;
 		popup.appendChild(dialogue);
-		// let rollCraps = document.createElement("button");
-		// rollCraps.innerHTML = "Roll";
-		// popup.appendChild(rollCraps);
+		let rollCraps = document.createElement("button");
+		rollCraps.id = "rollCraps"
+		rollCraps.innerHTML = "Roll";
+		rollCraps.addEventListener("click",rollAgain())
+		popup.appendChild(rollCraps);
 		while(gameOver == false){
 			diceOne = rollDie();
 			diceTwo = rollDie();
@@ -214,24 +220,26 @@ function diceGame(){
 				popup.appendChild(dialogue);
 			}
 		}
-		clearPopup();
 		if(roll == 7 || roll == 11) diceGame();
 		/*  else returnToStory(); */
 	}
 }
 
-function clearPopup(){
-
-}
-
-function returnToStory(){
-
+function rollAgain(){
+	document.getElementById = "rollCraps";
+	rollCraps.addEventListener("click",closePopup);
+	
 }
 
 function rollDie(){
 	return Math.floor(Math.random()*6+1);
 }
 
+function crapReRoll(){
+	document.getElementById = "tryAgain";
+	tryAgain.addEventListener("click",closePopup);
+	diceGame();
+}
 function closePopup(){
 	let popup = document.getElementById("popup");
 	popup.style.display = "none";
