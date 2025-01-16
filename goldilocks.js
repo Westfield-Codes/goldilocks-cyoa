@@ -2,7 +2,7 @@
 // Matches https://docs.google.com/spreadsheets/d/1eu_ymKNlnSQUzi6JfSyOwWewXX2fybDIw2YZfzhWIic/edit
 scene1 = Goldilocks;
 var roll = 0;
-
+var diceGameCount = 0;
 function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	if (answer == "Ignore cabin") {
 		crapsSetup();
@@ -164,36 +164,33 @@ function crapsSetup(){
 }
 function diceGame(){
 	let dialogue = document.getElementById("dialogue");
-	dialogue.innerHTML = ""
 	let gameOver = false;
 	let message ="";
+	let message2 = "";
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
 	message = "<p>Your target is "+target+"</p>";
-	dialogue.innerHTML = message;
+	popup.innerHTML = message;
+	diceGameCount++;
+	console.log("diceGameCount = "+diceGameCount)
 	if(target == 7 || target == 11){
-		message = "You crapped out! Try again.";
-		dialogue.innerHTML = message;
+		message2 = "<p>You crapped out! Try again.</p>";
+		popup.innerHTML = message2;
 		let tryAgain = document.createElement("button");
-		tryAgain.id = "tryAgain"
 		tryAgain.innerHTML = "Re-roll";
-		tryAgain.addEventListener("click",crapsReRoll());
+		// tryAgain.addEventListener("click",closePopup);
+		tryAgain.addEventListener("click",diceGame);
 		popup.appendChild(tryAgain);
-		// diceGame();
-		// tryAgain.addEventListener("click",diceGame);
-		
 	}
 	else {
 		let roll = 0;
 		message = "Hit "+target+" before you roll 7 or 11 to continue.";
 		dialogue.innerHTML = message;
 		popup.appendChild(dialogue);
-		let rollCraps = document.createElement("button");
-		rollCraps.id = "rollCraps"
-		rollCraps.innerHTML = "Roll";
-		rollCraps.addEventListener("click",rollAgain())
-		popup.appendChild(rollCraps);
+		// let rollCraps = document.createElement("button");
+		// rollCraps.innerHTML = "Roll";
+		// popup.appendChild(rollCraps);
 		while(gameOver == false){
 			diceOne = rollDie();
 			diceTwo = rollDie();
@@ -225,21 +222,10 @@ function diceGame(){
 	}
 }
 
-function rollAgain(){
-	document.getElementById = "rollCraps";
-	rollCraps.addEventListener("click",closePopup);
-	
-}
-
 function rollDie(){
 	return Math.floor(Math.random()*6+1);
 }
 
-function crapReRoll(){
-	document.getElementById = "tryAgain";
-	tryAgain.addEventListener("click",closePopup);
-	diceGame();
-}
 function closePopup(){
 	let popup = document.getElementById("popup");
 	popup.style.display = "none";
