@@ -166,17 +166,15 @@ function diceGame(){
 	let dialogue = document.getElementById("dialogue");
 	let gameOver = false;
 	let message ="";
-	let message2 = "";
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
 	message = "<p>Your target is "+target+"</p>";
-	popup.innerHTML = message;
 	diceGameCount++;
 	console.log("diceGameCount = "+diceGameCount)
 	if(target == 7 || target == 11){
-		message2 = "<p>You crapped out! Try again.</p>";
-		popup.innerHTML = message2;
+		message += "<p>You crapped out! Try again.</p>";
+		popup.innerHTML = message;
 		let tryAgain = document.createElement("button");
 		tryAgain.innerHTML = "Re-roll";
 		// tryAgain.addEventListener("click",closePopup);
@@ -184,19 +182,24 @@ function diceGame(){
 		popup.appendChild(tryAgain);
 	}
 	else {
-		let roll = 0;
-		message = "Hit "+target+" before you roll 7 or 11 to continue.";
-		dialogue.innerHTML = message;
+		message += "Hit "+target+" before you roll 7 or 11 to continue.";
+		popup.innerHTML = message;
+		message = ""
 		popup.appendChild(dialogue);
-		// let rollCraps = document.createElement("button");
-		// rollCraps.innerHTML = "Roll";
-		// popup.appendChild(rollCraps);
+		let rollCraps = document.createElement("button");
+		rollCraps.addEventListener("click",rollAgain);
+		rollCraps.innerHTML = "Roll";
+		popup.appendChild(rollCraps);
+		
+	}
+	function rollAgain(){
+		let roll = 0;
 		while(gameOver == false){
 			diceOne = rollDie();
 			diceTwo = rollDie();
 			roll = diceOne + diceTwo;
 			if(roll == target){
-				message = "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
+				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
 				dialogue.innerHTML = message;
 				popup.appendChild(dialogue);
 				gameOver = true;
@@ -206,19 +209,18 @@ function diceGame(){
 				popup.appendChild(wonCraps);
 			}
 			else if(roll == 7 || roll == 11){ 
-				message = "You crapped out with a(n) "+roll+". Try again.";
+				message += "You crapped out with a(n) "+roll+". Try again.";
 				dialogue.innerHTML = message;
 				popup.appendChild(dialogue);
 				gameOver = true;
 			}
 			else {
-				message = "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Roll again."
+				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Roll again."
 				dialogue.innerHTML = message;
 				popup.appendChild(dialogue);
 			}
 		}
 		if(roll == 7 || roll == 11) diceGame();
-		/*  else returnToStory(); */
 	}
 }
 
