@@ -2,7 +2,7 @@
 // Matches https://docs.google.com/spreadsheets/d/1eu_ymKNlnSQUzi6JfSyOwWewXX2fybDIw2YZfzhWIic/edit
 scene1 = Goldilocks;
 var roll = 0;
-var diceGameCount = 0;
+var rollcount = 0;
 function checkAnswers(answer) {  // Matches Scenes  - replace with yours
 	if (answer == "Ignore cabin") {
 		crapsSetup();
@@ -164,42 +164,53 @@ function crapsSetup(){
 }
 function diceGame(){
 	let dialogue = document.getElementById("dialogue");
+
+	let	message= " <p>Play craps to continue with your story.</p>";
+	dialogue.innerHTML = message;
+	let rollCraps = document.createElement("button");
+		rollCraps.addEventListener("click",firstRoll);
+		rollCraps.innerHTML = "Roll your come out";
+		popup.appendChild(rollCraps);
+}
+function firstRoll(){
 	let gameOver = false;
-	let message ="";
 	let diceOne = rollDie();
 	let diceTwo = rollDie();
 	let target = diceOne + diceTwo;
-	message = "<p>Your target is "+target+"</p>";
-	diceGameCount++;
-	console.log("diceGameCount = "+diceGameCount);
-	target = 7
+	rollcount++;
+	console.log("diceGameCount = "+rollcount);
 	if(target == 7 || target == 11){
 		message += "<p>You crapped out! Try again.</p>";
-		popup.innerHTML = message;
+		dialogue.innerHTML = message;
 		let newRound = document.createElement("button");
+		newRound.id = "newRound";
 		newRound.innerHTML = "New Round";
-		newRound.addEventListener("click",crapsSetup());
+		newRound.addEventListener("click",crapsSetup);
 		popup.appendChild(newRound);
 	}
 	else {
-		message += "Hit "+target+" before you roll 7 or 11 to continue.";
-		popup.innerHTML = message;
-		message = ""
+		message = "Hit "+target+" before you roll 7 or 11 to continue.";
+		dialogue.innerHTML = message;
 		popup.appendChild(dialogue);
 		let rollCraps = document.createElement("button");
 		rollCraps.addEventListener("click",rollAgain);
 		rollCraps.innerHTML = "Roll";
 		popup.appendChild(rollCraps);
-		
 	}
 	function rollAgain(){
 		let roll = 0;
+		if (dialogue = document.getElementById("dialogue")){
+			dialogue.remove();
+		}
+		if (newRound = document.getElementById("newRound")){
+			newRound.remove();
+		}
 		while(gameOver == false){
 			diceOne = rollDie();
 			diceTwo = rollDie();
 			roll = diceOne + diceTwo;
 			if(roll == target){
-				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
+				message += "Your target is "+target+". <br> You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
 				dialogue.innerHTML = message;
 				popup.appendChild(dialogue);
 				gameOver = true;
