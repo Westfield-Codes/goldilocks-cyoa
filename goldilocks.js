@@ -164,14 +164,16 @@ function crapsSetup(){
 }
 function diceGame(){
 	let dialogue = document.getElementById("dialogue");
-
 	let	message= " <p>Play craps to continue with your story.</p>";
 	dialogue.innerHTML = message;
 	let rollCraps = document.createElement("button");
+		rollCraps.id = "rollCraps";
 		rollCraps.addEventListener("click",firstRoll);
+		rollCraps.addEventListener("click",rollCraps.remove);
 		rollCraps.innerHTML = "Roll your come out";
 		popup.appendChild(rollCraps);
 }
+
 function firstRoll(){
 	let gameOver = false;
 	let diceOne = rollDie();
@@ -180,7 +182,7 @@ function firstRoll(){
 	rollcount++;
 	console.log("diceGameCount = "+rollcount);
 	if(target == 7 || target == 11){
-		message += "<p>You crapped out! Try again.</p>";
+		message = "<p>You crapped out! Try again.</p>";
 		dialogue.innerHTML = message;
 		let newRound = document.createElement("button");
 		newRound.id = "newRound";
@@ -197,51 +199,52 @@ function firstRoll(){
 		rollCraps.innerHTML = "Roll";
 		popup.appendChild(rollCraps);
 	}
+
 	function rollAgain(){
 		let roll = 0;
 		if (dialogue = document.getElementById("dialogue")){
-			dialogue.remove();
+			dialogue.innerHTML = "";
 		}
 		if (newRound = document.getElementById("newRound")){
 			newRound.remove();
 		}
-		while(gameOver == false){
-			diceOne = rollDie();
-			diceTwo = rollDie();
-			roll = diceOne + diceTwo;
-			if(roll == target){
-				message += "Your target is "+target+". <br> You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
-				dialogue.innerHTML = message;
-				popup.appendChild(dialogue);
-				gameOver = true;
-				let wonCraps = document.createElement("button");
-				wonCraps.innerHTML = "Close"
-				wonCraps.addEventListener("click",closePopup);
-				popup.appendChild(wonCraps);
-			}
-			else if(roll == 7 || roll == 11){ 
-				message += "You crapped out with a(n) "+roll+". Try again.";
-				dialogue.innerHTML = message;
-				popup.appendChild(dialogue);
-				gameOver = true;
-			}
-			else {
-				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Try again."
-				dialogue.innerHTML = message;
-				popup.appendChild(dialogue);
-				let reroll = document.createElement("button");
-				reroll.addEventListener("click",rollAgain);
-				reroll.innerHTML = "Roll";
-				popup.appendChild(reroll);
-			}
+		diceOne = rollDie();
+		diceTwo = rollDie();
+		roll = diceOne + diceTwo;
+		if(roll == target){
+			message += "Your target is "+target+". <br> You rolled a(n) "+diceOne+" and a(n) "+diceTwo+", that makes "+roll+". you are in!";
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
+			gameOver = true;
+			let wonCraps = document.createElement("button");
+			wonCraps.innerHTML = "Close"
+			wonCraps.addEventListener("click",closePopup);
+			popup.appendChild(wonCraps);
 		}
-		if(roll == 7 || roll == 11) diceGame();
+		else if(roll == 7 || roll == 11){ 
+			message += "You crapped out with a(n) "+roll+". Try again.";
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
+			gameOver = true;
+		}
+		else {
+			message += "You rolled "+diceOne+" and "+diceTwo+"! That makes "+roll+". Try again."
+			dialogue.innerHTML = message;
+			popup.appendChild(dialogue);
+			let reroll = document.createElement("button");
+			reroll.addEventListener("click",rollAgain);
+			reroll.innerHTML = "Roll";
+			popup.appendChild(reroll);
+		}
+		// if(roll == 7 || roll == 11) diceGame();
+		// }
+
 	}
 }
-
 function rollDie(){
 	return Math.floor(Math.random()*6+1);
 }
+
 
 function closePopup(){
 	let popup = document.getElementById("popup");
