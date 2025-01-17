@@ -171,15 +171,15 @@ function diceGame(){
 	let target = diceOne + diceTwo;
 	message = "<p>Your target is "+target+"</p>";
 	diceGameCount++;
-	console.log("diceGameCount = "+diceGameCount)
+	console.log("diceGameCount = "+diceGameCount);
+	target = 7
 	if(target == 7 || target == 11){
 		message += "<p>You crapped out! Try again.</p>";
 		popup.innerHTML = message;
-		let tryAgain = document.createElement("button");
-		tryAgain.innerHTML = "Re-roll";
-		// tryAgain.addEventListener("click",closePopup);
-		tryAgain.addEventListener("click",diceGame);
-		popup.appendChild(tryAgain);
+		let newRound = document.createElement("button");
+		newRound.innerHTML = "New Round";
+		newRound.addEventListener("click",crapsSetup());
+		popup.appendChild(newRound);
 	}
 	else {
 		message += "Hit "+target+" before you roll 7 or 11 to continue.";
@@ -215,9 +215,13 @@ function diceGame(){
 				gameOver = true;
 			}
 			else {
-				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Roll again."
+				message += "You rolled a(n) "+diceOne+" and a(n) "+diceTwo+"! That makes "+roll+". Try again."
 				dialogue.innerHTML = message;
 				popup.appendChild(dialogue);
+				let reroll = document.createElement("button");
+				reroll.addEventListener("click",rollAgain);
+				reroll.innerHTML = "Roll";
+				popup.appendChild(reroll);
 			}
 		}
 		if(roll == 7 || roll == 11) diceGame();
