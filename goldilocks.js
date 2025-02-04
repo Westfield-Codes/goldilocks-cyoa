@@ -164,13 +164,13 @@ function crapsSetup(){
 }
 function diceGame(){
     let dialogue = document.getElementById("dialogue");
-    let message= " <p>Play craps to continue with your story.</p>";
+    let message= " <p>Play craps to continue with your story. <br>Roll your come-out. <br>Don\'t crap out with a 7 or 11!</p>";
     dialogue.innerHTML = message;
     let rollCraps = document.createElement("button");
         rollCraps.id = "rollCraps";
         rollCraps.addEventListener("click",firstRoll);
         rollCraps.addEventListener("click",rollCraps.remove);
-        rollCraps.innerHTML = "Roll your come out";
+        rollCraps.innerHTML = "Roll come out.";
         popup.appendChild(rollCraps);
 }
 
@@ -203,7 +203,7 @@ function firstRoll(){
     }
     else {
         dialogue = document.getElementById("dialogue");
-        message = "Hit "+target+" before you roll 7 or 11 to continue.";
+        message = "Your come-out role was <strong>"+target+"</strong>.<br> Roll "+target+" again before you roll 7 or 11<br> to continue with the story.";
         dialogue.innerHTML = message;
         popup.appendChild(dialogue);
         rollCraps = document.createElement("button");
